@@ -47,13 +47,8 @@ def documentation(query):
 
 def main():
     # Define the application title and header
-    #st.title("Smart Code Solutions")
-    html_temp = f"""
-    <div style="background-color:navy;padding:10px">
-    <h2 style="color:white;text-align:center;">{title}</h2>
-    </div>
-    """
-    st.markdown(html_temp,unsafe_allow_html=True)
+    st.title("Smart Code Solutions")
+    
     st.header("What would you like to do?")
 
     # Using columns for a more structured layout
