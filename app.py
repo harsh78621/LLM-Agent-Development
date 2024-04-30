@@ -56,17 +56,20 @@ def main():
     st.markdown(html_temp,unsafe_allow_html=True)
     st.header("What would you like to do?")
 
-    # Create a select box for user input
-    selectbox = st.selectbox("Select an option", ("Complete code", "Debug code", "Documentation"))
-
-    # Get the user input
-    selected_option = selectbox
-
-    # Add a text input field for additional user input
-    text_input = st.text_area("Please enter any additional information or instructions")
-
+    # Using columns for a more structured layout
+    col1, col2 = st.columns(2)
+    
+    # Select box on the left column
+    with col1:
+        selected_option = st.selectbox("Select an option", ("Complete code", "Debug code", "Documentation"))
+    
+    # Text input on the right column
+    with col2:
+        text_input = st.text_area("Please enter any additional information or instructions")
+    
     # Display the user's selection
     st.write("You selected:", selected_option)
+
 
     # Add a submit button
     if st.button("Submit"):
