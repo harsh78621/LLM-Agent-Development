@@ -22,17 +22,7 @@ def complete_code(partial_code):
     Return the completed code as a string.
     """
 
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ]
-    )
-
-    return response.choices[0].message.content.strip()
+    return ask_gpt(prompt)
 
 
 # Debugging assistance function
