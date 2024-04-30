@@ -37,28 +37,21 @@ def complete_code(partial_code):
 
 # Debugging assistance function
 def debug_code(error_message):
-    prompt = f"""
-    Given the following error message: 
-    {error_message},
-    suggest a fix and explain why this error occurs.
-    Provide the corrected Python code as well.
-    """
-    response = ask_gpt(prompt) 
-    response_text = response.choices[0].message["content"].strip()
+    if not error_message:  # Validate the error message
+        return "Error: No error message provided.", ""
 
-    explanation_marker = "Here is the corrected code:"  # Identifies the start of the code block
-    if explanation_marker in response_text:
-        explanation = response_text.split(explanation_marker)[0].strip()  # Before the marker
-        code_block = response_text.split(explanation_marker)[1].strip()  # After the marker
-        
-        # Format the code block for proper display
-        formatted_code = '\n'.join(code_block.split('\n'))  # Ensure correct newlines and indentation
+    prompt = f"""
+    Given the following error message: {error_message},
+    suggest a fix and provide the corrected Python code.
+    """
+
+    response = ask_gpt(prompt)
+    if "Here is the corrected code:" in response:
+        explanation, code = response.split("Here is the corrected code:")
+        formatted_code = '\n'.join(code.strip().split('\n'))  # Format code block
+        return explanation.strip(), formatted_code
     else:
-        # Fallback if the marker isn't found
-        explanation = response_text
-        formatted_code = ""
-    
-    return explanation, formatted_code
+        return response.strip(), ""  # Fallback if no code is provided
 
 # Documentation retrieval function
 def documentation(query):
@@ -88,12 +81,11 @@ def main():
         if selected_option == "Complete code":
             output = complete_code(text_input)
             st.code(output, language='python')
-        elif selected_option == "Debug code":
-            explanation, corrected_code = debug_code(text_input)  # Get both explanation and code
-            # Display the explanation as plain text
-            st.write("Debugging Suggestion:", explanation)
-            # Display the corrected code with syntax highlighting
-            st.code(corrected_code, language='python')
+        elif selectbox == "Debug code":
+            explanation, corrected_code = debug_code(text_input)
+            st.write("Explanation:", explanation)  # Display the explanation
+            if corrected_code:  # Check if there's a corrected code block
+                st.code(corrected_code, language='python')
         elif selected_option == "Documentation":
             output = documentation(text_input)
             # Print the output from the function
