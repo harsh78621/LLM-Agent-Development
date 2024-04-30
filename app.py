@@ -32,7 +32,9 @@ def complete_code(partial_code):
         ]
     )
 
-    return response.choices[0].message.content.strip()
+    formatted_response = response.choices[0].message.content.strip()
+    formatted_response = '\n'.join(formatted_response.split('\\n'))
+    return formatted_response
 
 # Debugging assistance function
 def debug_code(error_message):
