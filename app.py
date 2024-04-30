@@ -71,10 +71,8 @@ def main():
                 output = complete_code(text_input)
                 st.code(output, language='python')  # Display code with syntax highlighting
             elif selected_option == "Debug code":
-                explanation, corrected_code = debug_code(text_input)  # Explanation and corrected code
-                st.write("Debugging Suggestion:", explanation)
-                if corrected_code:
-                    st.code(corrected_code, language='python')  # Corrected code in Python format
+                output = debug_code(text_input)
+                st.write("Documentation:", output)  # Corrected code in Python format
             elif selected_option == "Documentation":
                 output = documentation(text_input)
                 st.write("Documentation:", output)  # Displaying the output text
