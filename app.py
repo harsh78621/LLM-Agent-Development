@@ -48,6 +48,12 @@ def documentation(query):
 def main():
     # Define the application title and header
     st.title("Smart Code Solutions")
+    html_temp = """
+    <div style="background-color:tomato;padding:10px">
+    <h2 style="color:white;text-align:center;">Smart Code Solutions </h2>
+    </div>
+    """
+    st.markdown(html_temp,unsafe_allow_html=True)
     st.header("What would you like to do?")
 
     # Create a select box for user input
