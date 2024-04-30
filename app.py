@@ -49,7 +49,7 @@ def main():
     # Define the application title and header
     #st.title("Smart Code Solutions")
     html_temp = """
-    <div style="background-color:blue;padding:10px">
+    <div style="background-color:navy;padding:10px">
     <h2 style="color:white;text-align:center;">Smart Code Solutions </h2>
     </div>
     """
