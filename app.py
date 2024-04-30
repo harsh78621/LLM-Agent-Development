@@ -19,22 +19,17 @@ def complete_code(partial_code):
 
     {partial_code}
 
-    Return the completed code as a string.
+    Return the completed code as a valid Python code block.
     """
 
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ]
-    )
+    response = ask_gpt(prompt, engine="gpt-3.5-turbo", max_tokens=200, temperature=0.5)  # Adjusted for clarity
+    formatted_response = response.choices[0].message["content"].strip()
 
-    formatted_response = response.choices[0].message.content.strip()
+    # Ensure correct newline characters for code formatting
     formatted_response = '\n'.join(formatted_response.split('\\n'))
+
     return formatted_response
+
 
 # Debugging assistance function
 def debug_code(error_message):
@@ -65,13 +60,16 @@ def main():
 
     # Add a submit button
     if st.button("Submit"):
-        # Access the function based on the selected option
-        if selected_option == "Complete code":
+        if selectbox == "Complete code":
             output = complete_code(text_input)
-        elif selected_option == "Debug code":
+            # Use st.code to display formatted code with syntax highlighting
+            st.code(output, language='python')  # Set language for highlighting
+        elif selectbox == "Debug code":
             output = debug_code(text_input)
-        elif selected_option == "Documentation":
+            st.write("Debugging Suggestion:", output)  # Normal text output
+        elif selectbox == "Documentation":
             output = documentation(text_input)
+            st.write("Documentation Explanation:", output)
 
         # Print the output from the function
         st.write("Output:", output)
