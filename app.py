@@ -75,6 +75,8 @@ def main():
             output = documentation(text_input)
             # Print the output from the function
             st.write("Output:", output)
+    st.markdown("---")
+    st.markdown("**Smart Code Solutions** is a project by Harsh.")         
         
 
 # Run the main function
