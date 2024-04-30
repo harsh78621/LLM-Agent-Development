@@ -37,8 +37,28 @@ def complete_code(partial_code):
 
 # Debugging assistance function
 def debug_code(error_message):
-    prompt = f"Suggest a fix for this error message:\n{error_message}"
-    return ask_gpt(prompt)
+    prompt = f"""
+    Given the following error message: 
+    {error_message},
+    suggest a fix and explain why this error occurs.
+    Provide the corrected Python code as well.
+    """
+    response = ask_gpt(prompt) 
+    response_text = response.choices[0].message["content"].strip()
+
+    explanation_marker = "Here is the corrected code:"  # Identifies the start of the code block
+    if explanation_marker in response_text:
+        explanation = response_text.split(explanation_marker)[0].strip()  # Before the marker
+        code_block = response_text.split(explanation_marker)[1].strip()  # After the marker
+        
+        # Format the code block for proper display
+        formatted_code = '\n'.join(code_block.split('\n'))  # Ensure correct newlines and indentation
+    else:
+        # Fallback if the marker isn't found
+        explanation = response_text
+        formatted_code = ""
+    
+    return explanation, formatted_code
 
 # Documentation retrieval function
 def documentation(query):
@@ -67,15 +87,18 @@ def main():
         # Access the function based on the selected option
         if selected_option == "Complete code":
             output = complete_code(text_input)
-            # Use st.code to display formatted code with syntax highlighting
             st.code(output, language='python')
         elif selected_option == "Debug code":
-            output = debug_code(text_input)
+            explanation, corrected_code = debug_code(text_input)  # Get both explanation and code
+            # Display the explanation as plain text
+            st.write("Debugging Suggestion:", explanation)
+            # Display the corrected code with syntax highlighting
+            st.code(corrected_code, language='python')
         elif selected_option == "Documentation":
             output = documentation(text_input)
-
-        # Print the output from the function
-        st.write("Output:", output)
+            # Print the output from the function
+            st.write("Output:", output)
+        
 
 # Run the main function
 if __name__ == "__main__":
