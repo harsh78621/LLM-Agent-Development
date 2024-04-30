@@ -58,7 +58,7 @@ def main():
     selected_option = selectbox
 
     # Add a text input field for additional user input
-    text_input = st.text_input("Please enter any additional information or instructions")
+    text_input = st.text_area("Please enter any additional information or instructions")
 
     # Display the user's selection
     st.write("You selected:", selected_option)
