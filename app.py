@@ -47,7 +47,7 @@ def documentation(query):
 
 def main():
     # Define the application title and header
-    st.title("Code Utility App")
+    st.title("Smart Code Solutions")
     st.header("What would you like to do?")
 
     # Create a select box for user input
