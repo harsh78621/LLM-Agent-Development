@@ -37,21 +37,8 @@ def complete_code(partial_code):
 
 # Debugging assistance function
 def debug_code(error_message):
-    if not error_message:  # Validate the error message
-        return "Error: No error message provided.", ""
-
-    prompt = f"""
-    Given the following error message: {error_message},
-    suggest a fix and provide the corrected Python code.
-    """
-
-    response = ask_gpt(prompt)
-    if "Here is the corrected code:" in response:
-        explanation, code = response.split("Here is the corrected code:")
-        formatted_code = '\n'.join(code.strip().split('\n'))  # Format code block
-        return explanation.strip(), formatted_code
-    else:
-        return response.strip(), ""  # Fallback if no code is provided
+    prompt = f"Suggest a fix for this error message:\n{error_message}"
+    return ask_gpt(prompt)
 
 # Documentation retrieval function
 def documentation(query):
@@ -81,11 +68,8 @@ def main():
         if selected_option == "Complete code":
             output = complete_code(text_input)
             st.code(output, language='python')
-        elif selectbox == "Debug code":
-            explanation, corrected_code = debug_code(text_input)
-            st.write("Explanation:", explanation)  # Display the explanation
-            if corrected_code:  # Check if there's a corrected code block
-                st.code(corrected_code, language='python')
+        elif selected_option == "Debug code":
+            output = debug_code(text_input)
         elif selected_option == "Documentation":
             output = documentation(text_input)
             # Print the output from the function
