@@ -67,6 +67,8 @@ def main():
         # Access the function based on the selected option
         if selected_option == "Complete code":
             output = complete_code(text_input)
+            # Use st.code to display formatted code with syntax highlighting
+            st.code(output, language='python')
         elif selected_option == "Debug code":
             output = debug_code(text_input)
         elif selected_option == "Documentation":
