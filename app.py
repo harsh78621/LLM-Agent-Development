@@ -49,7 +49,7 @@ def main():
     # Define the application title and header
     #st.title("Smart Code Solutions")
     html_temp = f"""
-    <div style="background-color:navy;padding:10px; border-radius:10px;">  <!-- Border-radius for smooth corners -->
+    <div style="background-color:navy;padding:10px">
     <h2 style="color:white;text-align:center;">{title}</h2>
     </div>
     """
