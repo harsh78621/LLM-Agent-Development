@@ -53,6 +53,8 @@ def main():
     <h2 style="color:white;text-align:center;">Smart Code Solutions </h2>
     </div>
     """
+    st.markdown(html_temp, unsafe_allow_html=True)
+
     st.header("What would you like to do?")
 
     # Using columns for a more structured layout
