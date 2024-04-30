@@ -7,7 +7,7 @@ def ask_gpt(prompt):
         messages=[
             {"role": "user", "content": prompt}
         ],
-        max_tokens=80,  # Adjust the token limit as needed
+        max_tokens=200,  # Adjust the token limit as needed
         temperature=0.5  # Control creativity
     )
     return response.choices[0].message["content"].strip()
