@@ -72,18 +72,22 @@ def main():
 
 
     # Add a submit button
-    if st.button("Submit"):
-        # Access the function based on the selected option
+    # Add visual feedback to the submit button
+if st.button("Submit"):
+    with st.spinner("Processing..."):
+        # Determine which function to run based on user selection
         if selected_option == "Complete code":
             output = complete_code(text_input)
-            st.code(output, language='python')
+            st.code(output, language='python')  # Display code with syntax highlighting
         elif selected_option == "Debug code":
-            output = debug_code(text_input)
-            st.write("Output:", output)
+            explanation, corrected_code = debug_code(text_input)  # Explanation and corrected code
+            st.write("Debugging Suggestion:", explanation)
+            if corrected_code:
+                st.code(corrected_code, language='python')  # Corrected code in Python format
         elif selected_option == "Documentation":
             output = documentation(text_input)
-            # Print the output from the function
-            st.write("Output:", output)
+            st.write("Documentation:", output)  # Displaying the output text
+
     st.markdown("---")
     st.markdown("**Smart Code Solutions** is a project by Harsh.")         
         
