@@ -70,6 +70,7 @@ def main():
             st.code(output, language='python')
         elif selected_option == "Debug code":
             output = debug_code(text_input)
+            st.write("Output:", output)
         elif selected_option == "Documentation":
             output = documentation(text_input)
             # Print the output from the function
