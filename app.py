@@ -1,6 +1,9 @@
 import streamlit as st
 import openai
+from streamlit.cache import cache  # Use Streamlit's caching
 
+# Caching results to reduce processing time
+@st.cache(suppress_st_warning=True, show_spinner=False)
 def ask_gpt(prompt):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",  # You can change the model as needed
