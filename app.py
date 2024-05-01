@@ -27,12 +27,12 @@ def complete_code(partial_code):
 
 # Debugging assistance function
 def debug_code(error_message):
-    prompt = f"Suggest a fix for this error message:\n{error_message}"
+    prompt = f"Suggest possible explanation and a fix for this error message:\n{error_message}"
     return ask_gpt(prompt)
 
 # Documentation retrieval function
 def documentation(query):
-    prompt = f"Provide a Example and documentation for:\n{query}"
+    prompt = f"Provide an Example and documentation for:\n{query}"
     return ask_gpt(prompt)
 
 def main():
