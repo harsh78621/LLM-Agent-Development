@@ -15,7 +15,7 @@ def ask_gpt(prompt):
 # Define the functions
 def complete_code(partial_code):
     prompt = f"""
-    Given the following partial Python code, complete it to make it a valid Python program:
+    Given the following partial Python code, complete it to make it a valid Python program and use neccessary parameters if not specified:
 
     {partial_code}
 
