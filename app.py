@@ -8,7 +8,7 @@ def ask_gpt(prompt):
             {"role": "user", "content": prompt}
         ],
         max_tokens=400,  # Adjust the token limit as needed
-        temperature=0.5  # Control creativity
+        temperature=0.6  # Control creativity
     )
     return response.choices[0].message["content"].strip()
 
@@ -32,7 +32,7 @@ def debug_code(error_message):
 
 # Documentation retrieval function
 def documentation(query):
-    prompt = f"Provide an Example and documentation for:\n{query}"
+    prompt = f"Provide an Example and documentation in less than 400 token for:\n{query}"
     return ask_gpt(prompt)
 
 def main():
