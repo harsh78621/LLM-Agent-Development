@@ -72,7 +72,7 @@ def main():
                 st.code(output, language='python')  # Display code with syntax highlighting
             elif selected_option == "Debug code":
                 output = debug_code(text_input)
-                st.write("Documentation:", output)  # Corrected code in Python format
+                st.write(output)  # Corrected code in Python format
             elif selected_option == "Documentation":
                 output = documentation(text_input)
                 st.write("Documentation:", output)  # Displaying the output text
